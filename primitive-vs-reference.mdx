@@ -1,1 +1,43 @@
+---
+title: Primitive Values vs Reference Values
+author: Zen
+date: '03-13-2024'
+tags: ['programming']
+---
 
+# Primitive Values vs Reference Values ( Object Values )
+
+## Primitive Values
+1. Number
+2. String
+3. Boolean
+4. Undefined
+5. Null
+
+## Reference Values( Object Values )
+1. Objects
+2. Arrays
+3. Functions
+
+Primitive values တွေသည် JS engine ရဲ့ call stack အပိုင်းမှာ သိမ်းပြီးတော့ Reference Types တွေသည် JS engine ရဲ့ heap မှာသိမ်းပါတယ်။
+
+## Explain Primitive Value
+
+```js
+let x  = 10; 
+let y = x;
+x = 20; 
+console.log(x); // return 20
+console.log(y); // return 10
+```
+
+Primitive values တွေသည် call stack အပိုင်းမှာ သိမ်းထားတဲ့အတွက်ကြောင့် value change လိုက်တဲ့အခါမှာလည်း ပထမ value ကို overwrite မလုပ်ပဲ နောက်ထပ် address တစ်ခုနဲ့ call stack မှာ ထပ်ပေါင်းထည့်တယ်။ အဲ့ဒါကြောင့် y ရဲ့တန်ဖိုးမပြောင်းသွားတာဖြစ်ပါတယ်။ call stack မှာ data store လုပ်တဲ့အခါမှာ type သုံးမျိုးနဲ့ ခွဲမှတ်တယ်ဆိုပါစို့ name, address, value သုံးမျိုးမှတ်တယ်။
+
+```plaintext
+Call Stack
+Name = x , y
+Address = 0001, 0002
+Values = 10, 20
+```
+
+x ရဲ့ value ကို မပြောင်းခင်မှာ address(0001) နဲ့ သိမ်းတယ်။ y သည်လည်း x ရဲ့တန်ဖိုးကို assign လုပ်ထားတဲ့အတွက်ကြောင့် address 0001 မှာပဲ မှတ်ပါတယ်။ x ရဲ့တန်ဖိုးပြောင်းပြီးချိန်မှာတော့ နောက်ထပ် address တစ်ခုနဲ့ x က value ပါ ထပ်ပေါင်းပြီး မှတ်သွားပါတယ်။ အဲ့ဒါကြောင့် Primitive values တွေသည် value ပြောင်းလိုက်ပေမယ့် မူလတန်ဖိုးကို မထိခိုက်တာဖြစ်ပါတယ်။
