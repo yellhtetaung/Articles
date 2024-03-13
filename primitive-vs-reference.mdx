@@ -23,9 +23,9 @@ Primitive values တွေသည် JS engine ရဲ့ call stack အပို�
 ## Explain Primitive Value
 
 ```js
-let x  = 10; 
+let x  = 10;
 let y = x;
-x = 20; 
+x = 20;
 console.log(x); // return 20
 console.log(y); // return 10
 ```
@@ -40,3 +40,33 @@ Values = 10, 20
 ```
 
 x ရဲ့ value ကို မပြောင်းခင်မှာ address(0001) နဲ့ သိမ်းတယ်။ y သည်လည်း x ရဲ့တန်ဖိုးကို assign လုပ်ထားတဲ့အတွက်ကြောင့် address 0001 မှာပဲ မှတ်ပါတယ်။ x ရဲ့တန်ဖိုးပြောင်းပြီးချိန်မှာတော့ နောက်ထပ် address တစ်ခုနဲ့ x က value ပါ ထပ်ပေါင်းပြီး မှတ်သွားပါတယ်။ အဲ့ဒါကြောင့် Primitive values တွေသည် value ပြောင်းလိုက်ပေမယ့် မူလတန်ဖိုးကို မထိခိုက်တာဖြစ်ပါတယ်။
+
+## Explain Reference Values
+
+```js
+let obj1 = {
+ name: ‘mg mg’,
+ age: 24,
+}
+let obj2 = obj1;
+obj1.name = ‘kyaw kyaw’
+console.log(obj1.name); // return kyaw kyaw
+console.log(obj2.name); // return kyaw kyaw
+```
+
+Reference values တွေသည် js engine ရဲ့ heap အပိုင်းမှာ သိမ်းပါတယ်။ သို့ပေမယ့် call stack မှာလည်း သိမ်းပါတယ်။ call stack သိမ်းတဲ့ type က
+
+```plaintext
+Call Stack
+name = x , y, obj1 , obj2
+address = 0001, 0002, 0003
+value = 10, 20, DOF3(heap address)
+Heap
+address = DOF3 (call stack value)
+value = {
+ name: ‘mg mg’,
+ age: 24
+}
+```
+
+`obj2` သည် `obj1` ကို assign လုပ်တဲ့အတွက်ကြောင့် call stack မှာ address တစ်ခုတည်းနဲ့ပဲ မှတ်သွားပါတယ်။ call stack မှာ object, arrary, function တွေကို extract မလုပ်ပါဘူး။ heap မှာ call stack value ကို heap address နဲ့ သိမ်းပြီး reference type တွေကို extract လုပ်ပါတယ်။ အဲ့ဒါကြောင့် object တို့ array တို့ မှာ reassign လုပ်ထားတဲ့ value ပြောင်းလိုက်တဲ့အခါမှာ heap ရဲ့ extract လုပ်တဲ့ တန်ဖိုးကိုပါ ပြောင်းသွားတဲ့အတွက်ကြောင့် မူလတန်ဖိုးကိုပါ ထိခိုက်တာဖြစ်ပါတယ်။
